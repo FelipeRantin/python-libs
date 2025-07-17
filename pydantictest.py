@@ -1,11 +1,15 @@
 from pydantic import BaseModel, ValidationError
 
-class Produto(BaseModel):
-    nome: str
-    preco: float
+class Product(BaseModel):
+    item_name: str
+    price: float
 
 try:
-    p = Produto(nome="Celular", preco=10.0)
+    p = Product(item_name="Phone", price=10.0)
 except ValidationError as e:
     print("Erro de validação:", e)
-print(f'{p}')
+finally:
+    # Method that converts the data set into a dictionary
+    print(p.model_dump())
+    # Method that converts the data set into a JSON object
+    print(p.model_dump_json())
